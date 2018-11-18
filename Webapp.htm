@@ -8,18 +8,38 @@
 
 <link href="/Users/admin/Documents/CaptionCreator/Stylingwebapp.css" type="text/css" rel="stylesheet">
 <head> </head>
-<body background="/Users/admin/Downloads/pexels-photo-355747.jpeg">
+<body background= "/Users/admin/Downloads/pexels-photo-355747.jpeg">
     <header><h1> Caption Creator </h1>
-        <h2> The use of instagram captions to upload food choices on social media has been a rising concept.<br> <br>Many individuals do not know what to say when showcasing their choice of meals. <br><br>We obtain data from the image that is uploaded and generate a caption related to the food that is given</header>
+        <h2> Searching for that perfect caption for your last meal? <br> <br>We got you covered<br> <br> Upload an image right now! </h2></header>
            <!-- <button class="button" onclick="location.href='http://www.youtube.com'" type="button">
                 Our story</button> -->
-                <video height="auto" controls="controls" preload="none" onclick="this.play()">
-                    <source type="video/mp4" src="/Users/admin/Documents/Bad Hair Preview.mp4" >
-                </video>
-        
-            </video> 
+                <input type="file" id="myFile" multiple size="1000" onchange="myFunction()">
+                <h1 class="answer" id="demo"></h1> </body>
+                
+           
             
             
  </body>
+ <script>
+    function myFunction(){
+        var x = document.getElementById("myFile");
+        var formData = new FormData();
+        var fileField = document.querySelector("input[type='file']");
+
+        console.log("hello");
+        formData.append("image", fileField.files[0]);
+        fetch('http://127.0.0.1:5000/firstnum/123', {
+                method: 'POST',
+                body: formData
+            })
+        .then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            console.log('Success:', JSON.stringify(response))
+            document.getElementById("demo").innerHTML = response.caption;
+        });
+         
+    }
+</script>
 
 </htmL>
